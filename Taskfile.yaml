@@ -7,16 +7,38 @@ tasks:
     cmds:
       - task --list
 
-  dependencies:install:
+  app:dependencies:install:
     desc: Install project dependencies
     cmds:
       - docker compose run --rm app composer install --prefer-dist --optimize-autoloader --no-interaction
     aliases:
-      - d:i
+      - a:d:i
 
-  dependencies:update:
+  app:dependencies:update:
     desc: Update project dependencies
     cmds:
       - docker compose run --rm app composer update --prefer-dist --optimize-autoloader --no-interaction
     aliases:
-      - d:u
+      - a:d:u
+
+  database:start:
+    desc: Start the database
+    cmds:
+      - docker compose up -d database
+      - ./docker/database/wait_for_it.sh
+    aliases:
+      - db:start
+
+  database:stop:
+    desc: Stop the database
+    cmds:
+      - docker compose stop database
+    aliases:
+      - db:stop
+
+  docker:down:
+    desc: Stop all Docker containers and clean volumes
+    cmds:
+      - docker compose down -v --remove-orphans
+    aliases:
+      - d:d

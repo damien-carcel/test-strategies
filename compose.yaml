@@ -1,21 +1,31 @@
 services:
   php:
     build:
-      target: 'dev'
+      target: dev
     environment:
-      COMPOSER_CACHE_DIR: '/home/composer/.cache/composer'
-      COMPOSER_HOME: '/home/composer/.config/composer'
+      COMPOSER_CACHE_DIR: /home/composer/.cache/composer
+      COMPOSER_HOME: /home/composer/.config/composer
       PHP_CONF_DISPLAY_ERRORS: 1
       PHP_CONF_DISPLAY_STARTUP_ERRORS: 1
       PHP_CONF_ERROR_REPORTING: 32767
       PHP_CONF_OPCACHE_VALIDATE_TIMESTAMP: 1
       PHP_CONF_ZEND_ASSERTIONS: 1
-      PHP_IDE_CONFIG: 'serverName=app-skeleton-php'
-      XDEBUG_CONFIG: 'client_host=172.17.0.1'
-      XDEBUG_MODE: '${XDEBUG_MODE:-off}'
-    user: '${HOST_USER_IDS:-1000:1000}'
+      PHP_IDE_CONFIG: serverName=app-skeleton-php
+      XDEBUG_CONFIG: client_host=172.17.0.1
+      XDEBUG_MODE: ${XDEBUG_MODE:-off}
+    user: ${HOST_USER_IDS:-1000:1000}
     volumes:
-      - '.:/srv/app'
-      - '${HOST_COMPOSER_CACHE_DIR:-~/.cache/composer}:/home/composer/.cache/composer'
-      - '${HOST_COMPOSER_HOME:-~/.config/composer}:/home/composer/.config/composer'
-    working_dir: '/srv/app'
+      - .:/srv/app
+      - ${HOST_COMPOSER_CACHE_DIR:-~/.cache/composer}:/home/composer/.cache/composer
+      - ${HOST_COMPOSER_HOME:-~/.config/composer}:/home/composer/.config/composer
+    working_dir: /srv/app
+
+  database:
+    environment:
+      POSTGRES_DB: ${PGSQL_DB:-app}
+      POSTGRES_USER: ${PGSQL_USERNAME:-app}
+      POSTGRES_PASSWORD: ${PGSQL_PASSWORD:-password}
+    image: postgres:16
+    ports:
+      - 5432:5432
+    restart: unless-stopped
