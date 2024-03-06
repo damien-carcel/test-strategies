@@ -28,6 +28,37 @@ tasks:
     aliases:
       - a:t:u
 
+  app:tests:acceptance:
+    desc: Run acceptance tests
+    cmds:
+      - docker compose run --rm php vendor/bin/phpunit --testsuite "Acceptance Tests" --testdox
+    aliases:
+      - a:t:a
+
+  app:tests:integration:
+    desc: Run integration tests
+    cmds:
+      - docker compose run --rm php vendor/bin/phpunit --testsuite "Integration Tests" --testdox
+    aliases:
+      - a:t:i
+
+  app:tests:end-to-end:
+    desc: Run end-to-end tests
+    cmds:
+      - docker compose run --rm php vendor/bin/phpunit --testsuite "End-to-End Tests Tests" --testdox
+    aliases:
+      - a:t:e
+
+  app:tests:
+    desc: Run all tests
+    cmds:
+      - task: a:t:u
+      - task: a:t:a
+      - task: a:t:i
+      - task: a:t:e
+    aliases:
+      - a:t
+
   database:start:
     desc: Start the database
     cmds:
