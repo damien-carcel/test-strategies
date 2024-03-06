@@ -1,0 +1,22 @@
+version: '3'
+
+silent: true
+
+tasks:
+  default:
+    cmds:
+      - task --list
+
+  dependencies:install:
+    desc: Install project dependencies
+    cmds:
+      - docker compose run --rm app composer install --prefer-dist --optimize-autoloader --no-interaction
+    aliases:
+      - d:i
+
+  dependencies:update:
+    desc: Update project dependencies
+    cmds:
+      - docker compose run --rm app composer update --prefer-dist --optimize-autoloader --no-interaction
+    aliases:
+      - d:u
