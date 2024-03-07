@@ -15,9 +15,15 @@ services:
       XDEBUG_MODE: ${XDEBUG_MODE:-off}
     user: ${HOST_USER_IDS:-1000:1000}
     volumes:
-      - .:/srv/app
-      - ${HOST_COMPOSER_CACHE_DIR:-~/.cache/composer}:/home/composer/.cache/composer
-      - ${HOST_COMPOSER_HOME:-~/.config/composer}:/home/composer/.config/composer
+      - type: bind
+        source: .
+        target: /srv/app
+      - type: bind
+        source: ${HOST_COMPOSER_CACHE_DIR:-~/.cache/composer}
+        target: /home/composer/.cache/composer
+      - type: bind
+        source: ${HOST_COMPOSER_HOME:-~/.config/composer}
+        target: /home/composer/.cache/composer
     working_dir: /srv/app
 
   database:
