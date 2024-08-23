@@ -16,7 +16,7 @@ tasks:
     desc: Updates project dependencies to their latest version
     preconditions:
       - sh: test -d node_modules
-        msg: Cannot upgrade the dependencies if they are not already installed
+        msg: Cannot update the dependencies if they are not already installed
 
   outdated:
     aliases:

@@ -40,7 +40,7 @@ services:
     user: ${HOST_USER_IDS:-1000:1000}
     volumes:
       - type: bind
-        source: ./demo
+        source: .
         target: /srv/app
       - type: bind
         source: ${HOST_COMPOSER_CACHE_DIR:-~/.cache/composer}
@@ -48,7 +48,7 @@ services:
       - type: bind
         source: ${HOST_COMPOSER_HOME:-~/.config/composer}
         target: /home/composer/.cache/composer
-    working_dir: /srv/app
+    working_dir: /srv/app/demo
 
   database:
     environment:
