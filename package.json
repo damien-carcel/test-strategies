@@ -1,0 +1,26 @@
+{
+  "name": "my-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint '**/*.{js,jsx,mjs,ts,tsx}'",
+    "preview": "vite preview",
+    "prettier": "prettier '**/*.{js,jsx,mjs,ts,tsx}'",
+    "stylelint": "stylelint '**/*.css'"
+  },
+  "dependencies": {
+    "reveal.js": "^5.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.8.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-formatter-junit": "^8.40.0",
+    "prettier": "^3.3.3",
+    "stylelint": "^16.8.1",
+    "stylelint-config-standard": "^36.0.1",
+    "vite": "^5.3.4"
+  }
+}

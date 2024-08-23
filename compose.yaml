@@ -1,0 +1,23 @@
+services:
+  dev:
+    command:
+      - npm
+      - run
+      - dev
+    environment:
+      NPM_CONFIG_CACHE: ${NPM_CONFIG_CACHE:-/home/node/.npm}
+    expose:
+      - 8000
+    image: node:lts-slim
+    ports:
+      - 8000:8000
+    tty: true
+    user: ${HOST_USER_IDS:-1000:1000}
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+      - type: bind
+        source: ~/.npm
+        target: /home/node/.npm
+    working_dir: /app
