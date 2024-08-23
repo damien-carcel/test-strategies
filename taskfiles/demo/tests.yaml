@@ -5,28 +5,28 @@ tasks:
     aliases:
       - a:t:u
     cmds:
-      - docker compose run --rm demo bin/phpunit --testsuite "Unit Tests" --testdox
+      - docker compose run --rm demo bin/phpunit --testsuite "Unit Tests" --testdox {{.CLI_ARGS}}
     desc: Run unit tests
 
   acceptance:
     aliases:
       - a:t:a
     cmds:
-      - docker compose run --rm demo bin/phpunit --testsuite "Acceptance Tests" --testdox
+      - docker compose run --rm demo bin/phpunit --testsuite "Acceptance Tests" --testdox {{.CLI_ARGS}}
     desc: Run acceptance tests
 
   integration:
     aliases:
       - a:t:i
     cmds:
-      - docker compose run --rm demo bin/phpunit --testsuite "Integration Tests" --testdox
+      - docker compose run --rm demo bin/phpunit --testsuite "Integration Tests" --testdox {{.CLI_ARGS}}
     desc: Run integration tests
 
   end-to-end:
     aliases:
       - a:t:e
     cmds:
-      - docker compose run --rm demo bin/phpunit --testsuite "End-to-End Tests" --testdox
+      - docker compose run --rm demo bin/phpunit --testsuite "End-to-End Tests" --testdox {{.CLI_ARGS}}
     desc: Run end-to-end tests
 
   all:

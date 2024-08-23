@@ -1,20 +1,29 @@
 version: 2.1
 
+aliases:
+  workflow_context_and_filters: &workflow_context_and_filters
+    context:
+      - docker-hub-credentials
+    filters:
+      branches:
+        ignore:
+          - main
+
+  job_executor: &job_executor
+    machine:
+      image: ubuntu-2204:2024.05.1
+
 workflows:
   pull_request:
     jobs:
+      - demo:
+          <<: *workflow_context_and_filters
       - presentation:
-          context:
-            - docker-hub-credentials
-          filters:
-            branches:
-              ignore:
-                - main
+          <<: *workflow_context_and_filters
 
 jobs:
   presentation:
-    machine:
-      image: ubuntu-2204:2024.05.1
+    <<: *job_executor
     steps:
       - checkout
       - set_host_user_ids_environment_variable
@@ -48,6 +57,45 @@ jobs:
           path: test_results
       - store_test_results:
           path: test_results
+
+  demo:
+    <<: *job_executor
+    steps:
+      - checkout
+      - set_host_user_ids_environment_variable
+      - run:
+          name: Setup cache directory
+          command: ./.devcontainer/setup.sh
+      - run:
+          name: Install the latest Task binary
+          command: npm install -g @go-task/cli
+      - restore_cache:
+          keys:
+            - composer-{{ .Environment.CACHE_VERSION }}-{{ checksum "demo/composer.lock" }}
+            - composer-{{ .Environment.CACHE_VERSION }}-
+      - run:
+          name: Install dependencies
+          command: task demo:dependencies:install
+      - save_cache:
+          key: composer-{{ .Environment.CACHE_VERSION }}-{{ checksum "demo/composer.lock" }}
+          paths:
+            - ./demo/vendor
+      - run:
+          name: Run the unit tests
+          command: task demo:tests:unit -- --log-junit test_results/unit.xml
+      - run:
+          name: Run the unit tests
+          command: task demo:tests:acceptance -- --log-junit test_results/acceptance.xml
+      - run:
+          name: Run the unit tests
+          command: task demo:tests:integration -- --log-junit test_results/integration.xml
+      - run:
+          name: Run the unit tests
+          command: task demo:tests:end-to-end -- --log-junit test_results/e2e.xml
+      - store_artifacts:
+          path: demo/test_results
+      - store_test_results:
+          path: demo/test_results
 
 commands:
   set_host_user_ids_environment_variable:

@@ -15,3 +15,5 @@ FROM mcr.microsoft.com/devcontainers/base:debian-12
 #     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+
+RUN curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/main/install.sh | bash
