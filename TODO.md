@@ -2,7 +2,6 @@
 
 ## Preparations
 
-- Run the demo tests in the CI
 - Add PHP support to Dev Container
 
 ## Plan
