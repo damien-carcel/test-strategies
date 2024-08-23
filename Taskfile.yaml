@@ -3,15 +3,27 @@ version: "3"
 silent: true
 
 includes:
-  dependencies:
-    taskfile: ./taskfiles/dependencies.yaml
-    aliases: [d]
-  run:
-    taskfile: ./taskfiles/run.yaml
-    aliases: [r]
-  tests:
-    taskfile: ./taskfiles/tests.yaml
-    aliases: [t]
+  demo:database:
+    taskfile: ./taskfiles/demo/database.yaml
+    aliases: [d:db, d:database]
+  demo:dependencies:
+    taskfile: ./taskfiles/demo/dependencies.yaml
+    aliases: [d:d, d:dependencies]
+  demo:run:
+    taskfile: ./taskfiles/demo/run.yaml
+    aliases: [d:r, d:run]
+  demo:tests:
+    taskfile: ./taskfiles/demo/tests.yaml
+    aliases: [d:t, d:tests]
+  presentation:dependencies:
+    taskfile: ./taskfiles/presentation/dependencies.yaml
+    aliases: [p:d, p:dependencies]
+  presentation:run:
+    taskfile: ./taskfiles/presentation/run.yaml
+    aliases: [p:r, p:run]
+  presentation:tests:
+    taskfile: ./taskfiles/presentation/tests.yaml
+    aliases: [p:t, p:tests]
 
 tasks:
   default:

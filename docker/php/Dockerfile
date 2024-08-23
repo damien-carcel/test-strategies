@@ -48,7 +48,7 @@ RUN echo 'APT::Install-Recommends "0" ; APT::Install-Suggests "0" ;' > /etc/apt/
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     mkdir -p /run/php/
 
-COPY docker/php/app.ini /etc/php/8.3/cli/conf.d/99-app.ini
+COPY app.ini /etc/php/8.3/cli/conf.d/99-app.ini
 
 ######################################
 # PHP CLI image used for development #
@@ -69,7 +69,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Configure XDEBUG and make XDEBUG activable at container start
-COPY docker/php/xdebug.ini /etc/php/8.3/cli/conf.d/99-xdebug.ini
+COPY xdebug.ini /etc/php/8.3/cli/conf.d/99-xdebug.ini
 
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer

@@ -5,9 +5,13 @@
   "files.trimTrailingWhitespace": true,
   "yaml.schemas": {
     "https://taskfile.dev/schema.json": [
-      "taskfiles/dependencies.yaml",
-      "taskfiles/run.yaml",
-      "taskfiles/tests.yaml"
+      "taskfiles/demo/database.yaml",
+      "taskfiles/demo/dependencies.yaml",
+      "taskfiles/demo/run.yaml",
+      "taskfiles/demo/tests.yaml",
+      "taskfiles/presentation/dependencies.yaml",
+      "taskfiles/presentation/run.yaml",
+      "taskfiles/presentation/tests.yaml"
     ]
   }
 }

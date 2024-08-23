@@ -1,0 +1,29 @@
+version: 3
+
+tasks:
+  install:
+    aliases:
+      - i
+    cmds:
+      - docker compose run --rm demo composer install --prefer-dist --optimize-autoloader --no-interaction
+    desc: Install project dependencies
+
+  outdated:
+    aliases:
+      - o
+    cmds:
+      - docker compose run --rm demo composer outdated
+    desc: Check for outdated dependencies
+    preconditions:
+      - sh: test -d demo/vendor
+        msg: Cannot upgrade the dependencies if they are not already installed
+
+  update:
+    aliases:
+      - u
+    cmds:
+      - docker compose run --rm demo composer outdated --prefer-dist --optimize-autoloader --no-interaction
+    desc: Update project dependencies
+    preconditions:
+      - sh: test -d demo/vendor
+        msg: Cannot upgrade the dependencies if they are not already installed

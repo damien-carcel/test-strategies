@@ -1,0 +1,16 @@
+version: 3
+
+tasks:
+  bash:
+    aliases:
+      - b
+    cmds:
+      - docker compose run --rm --remove-orphans presentation bash
+    desc: Launch a shell in the development container
+
+  dev:
+    aliases:
+      - d
+    cmds:
+      - docker compose up --detach --remove-orphans presentation
+    desc: Run the presentation development server

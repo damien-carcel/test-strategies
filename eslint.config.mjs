@@ -6,9 +6,9 @@ export default [
   js.configs.recommended,
   eslintConfigPrettier,
   {
+    ignores: ['demo/', 'dist/', 'public/'],
     languageOptions: {
       globals: globals.browser,
     },
-    ignores: ['dist/', 'public/'],
   },
 ];

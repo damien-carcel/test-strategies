@@ -2,10 +2,8 @@
 
 ## Preparations
 
-- Setup the presentation
-- Add DevContainer config for the demo
-  - Control with taskfiles
-  - Move compose file and Dockerfile to the root of the project
+- Update the demo dependencies
+- Run the demo tests in the CI
 
 ## Plan
 

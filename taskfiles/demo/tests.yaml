@@ -1,0 +1,66 @@
+version: "3"
+
+tasks:
+  unit:
+    aliases:
+      - a:t:u
+    cmds:
+      - docker compose run --rm demo bin/phpunit --testsuite "Unit Tests" --testdox
+    desc: Run unit tests
+
+  acceptance:
+    aliases:
+      - a:t:a
+    cmds:
+      - docker compose run --rm demo bin/phpunit --testsuite "Acceptance Tests" --testdox
+    desc: Run acceptance tests
+
+  integration:
+    aliases:
+      - a:t:i
+    cmds:
+      - docker compose run --rm demo bin/phpunit --testsuite "Integration Tests" --testdox
+    desc: Run integration tests
+
+  end-to-end:
+    aliases:
+      - a:t:e
+    cmds:
+      - docker compose run --rm demo bin/phpunit --testsuite "End-to-End Tests" --testdox
+    desc: Run end-to-end tests
+
+  all:
+    aliases:
+      - a
+    cmds:
+      - echo ""
+      - echo "|-----------------------|"
+      - echo "|    Run unit tests     |"
+      - echo "|-----------------------|"
+      - echo ""
+      - task: unit
+      - echo ""
+      - echo "|-----------------------|"
+      - echo "| Run acceptance tests  |"
+      - echo "|-----------------------|"
+      - echo ""
+      - task: acceptance
+      - echo ""
+      - echo "|-----------------------|"
+      - echo "| Run integration tests |"
+      - echo "|-----------------------|"
+      - echo ""
+      - task: integration
+      - echo ""
+      - echo "|-----------------------|"
+      - echo "| Run end-to-end tests  |"
+      - echo "|-----------------------|"
+      - echo ""
+      - task: end-to-end
+      - echo ""
+      - echo "|-----------------------|"
+      - echo "|       All Tests       |"
+      - echo "| Successfully Executed |"
+      - echo "|-----------------------|"
+      - echo ""
+    desc: Execute all the tests

@@ -10,6 +10,12 @@ services:
         source: ..
         target: /app
       - type: bind
+        source: ~/.cache/composer
+        target: /home/vscode/.cache/composer
+      - type: bind
+        source: ~/.config/composer
+        target: /home/vscode/.config/composer
+      - type: bind
         source: ~/.npm
         target: /home/vscode/.npm
     working_dir: /app

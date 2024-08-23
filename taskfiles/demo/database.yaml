@@ -1,0 +1,17 @@
+version: 3
+
+tasks:
+  up:
+    desc: Start the database
+    cmds:
+      - docker compose up -d database
+      - ./docker/database/wait_for_it.sh
+    aliases:
+      - u
+
+  stop:
+    aliases:
+      - s
+    cmds:
+      - docker compose stop database
+    desc: Stop the database

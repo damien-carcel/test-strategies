@@ -14,23 +14,19 @@
       ]
     }
   },
-  "dockerComposeFile": [
-    "./compose.yaml"
-  ],
+  "dockerComposeFile": ["./compose.yaml"],
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/node:1": {}
   },
-  "forwardPorts": [
-    8000
-  ],
+  "forwardPorts": [8000],
   "initializeCommand": "./.devcontainer/setup.sh",
   "portsAttributes": {
     "8000": {
       "label": "Vite Dev server"
     }
   },
-  "postCreateCommand": "task dependencies:install run:dev",
+  "postCreateCommand": "task presentation:dependencies:install presentation:run:dev",
   "name": "my-app",
   "service": "devcontainer",
   "workspaceFolder": "/app"
