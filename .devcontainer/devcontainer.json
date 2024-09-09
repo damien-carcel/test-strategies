@@ -2,22 +2,30 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "bmewburn.vscode-intelephense-client",
         "CircleCI.circleci",
         "dbaeumer.vscode-eslint",
+        "devsense.phptools-vscode",
         "eamodio.gitlens",
         "esbenp.prettier-vscode",
+        "junstyle.php-cs-fixer",
         "ms-azuretools.vscode-docker",
         "redhat.vscode-yaml",
         "streetsidesoftware.code-spell-checker",
         "task.vscode-task",
-        "yzhang.markdown-all-in-one"
+        "yzhang.markdown-all-in-one",
+        "xdebug.php-debug",
+        "xdebug.php-pack"
       ]
     }
   },
   "dockerComposeFile": ["./compose.yaml"],
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/node:1": {}
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/php:1": {
+      "version": "8.3"
+    }
   },
   "forwardPorts": [8000],
   "initializeCommand": "./.devcontainer/setup.sh",

@@ -12,7 +12,14 @@ final class CreateUserTest extends AbstractEndToEndTestCase
     {
         $client = self::createClient();
 
-        $client->request('POST', '/', [], [], [], json_encode(['email' => 'gandalf.thegrey@theshire.com']));
+        $client->request(
+            'POST',
+            '/',
+            [],
+            [],
+            [],
+            json_encode(['email' => 'gandalf.thegrey@theshire.com'], \JSON_THROW_ON_ERROR),
+        );
 
         $response = $client->getResponse();
         self::assertSame(200, $response->getStatusCode());

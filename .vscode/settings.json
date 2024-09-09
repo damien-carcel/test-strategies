@@ -3,6 +3,12 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "php-cs-fixer.executablePath": "/app/demo/vendor/bin/php-cs-fixer",
+  "php-cs-fixer.onsave": true,
+  "php-cs-fixer.formatHtml": true,
+  "[php]": {
+    "editor.defaultFormatter": "junstyle.php-cs-fixer"
+  },
   "yaml.schemas": {
     "https://taskfile.dev/schema.json": [
       "taskfiles/demo/database.yaml",
@@ -13,5 +19,6 @@
       "taskfiles/presentation/run.yaml",
       "taskfiles/presentation/tests.yaml"
     ]
-  }
+  },
+  "php-cs-fixer.config": "/app/demo/.php-cs-fixer.dist.php"
 }

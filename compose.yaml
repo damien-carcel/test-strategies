@@ -41,14 +41,14 @@ services:
     volumes:
       - type: bind
         source: .
-        target: /srv/app
+        target: /app
       - type: bind
         source: ${HOST_COMPOSER_CACHE_DIR:-~/.cache/composer}
         target: /home/composer/.cache/composer
       - type: bind
         source: ${HOST_COMPOSER_HOME:-~/.config/composer}
         target: /home/composer/.cache/composer
-    working_dir: /srv/app/demo
+    working_dir: /app/demo
 
   database:
     environment:

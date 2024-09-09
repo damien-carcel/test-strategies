@@ -1,9 +1,5 @@
 # Testing Strategies
 
-## Preparations
-
-- Add PHP support to Dev Container
-
 ## Plan
 
 ### Introduction
