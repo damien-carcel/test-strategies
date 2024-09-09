@@ -87,6 +87,9 @@ jobs:
           name: Check the code-style
           command: task demo:tests:code-style:check -- --format=junit > demo/test_results/cs.xml
       - run:
+          name: Check the code-style
+          command: task demo:tests:static-analysis -- --error-format=junit > demo/test_results/sa.xml
+      - run:
           name: Run the unit tests
           command: task demo:tests:unit -- --log-junit test_results/unit.xml
       - run:

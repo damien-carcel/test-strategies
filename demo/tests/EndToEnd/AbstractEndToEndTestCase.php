@@ -9,6 +9,9 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 abstract class AbstractEndToEndTestCase extends WebTestCase
 {
+    /**
+     * @param array<string, string> $options
+     */
     protected static function bootKernel(array $options = []): KernelInterface
     {
         $options = array_merge($options, ['environment' => 'test']);

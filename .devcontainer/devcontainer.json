@@ -8,6 +8,7 @@
         "devsense.phptools-vscode",
         "eamodio.gitlens",
         "esbenp.prettier-vscode",
+        "junstyle.php-cs-fixer",
         "ms-azuretools.vscode-docker",
         "redhat.vscode-yaml",
         "streetsidesoftware.code-spell-checker",

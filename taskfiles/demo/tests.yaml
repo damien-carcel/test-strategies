@@ -19,6 +19,13 @@ tasks:
       - docker compose run --rm demo vendor/bin/php-cs-fixer fix {{.CLI_ARGS}}
     desc: Fix code-style
 
+  static-analysis:
+    aliases:
+      - sa
+    cmds:
+      - docker compose run --rm demo vendor/bin/phpstan analyse {{.CLI_ARGS}}
+    desc: Run static analysis
+
   unit:
     aliases:
       - u
@@ -55,6 +62,12 @@ tasks:
       - echo "|-----------------------|"
       - echo ""
       - task: code-style:check
+      - echo ""
+      - echo "|-----------------------|"
+      - echo "|  Run static analysis  |"
+      - echo "|-----------------------|"
+      - echo ""
+      - task: static-analysis
       - echo ""
       - echo "|-----------------------|"
       - echo "|    Run unit tests     |"
