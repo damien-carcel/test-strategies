@@ -12,7 +12,7 @@ final readonly class CreateUserController
     #[Route(
         path: '/',
         name: 'create_user',
-        methods: ['POST']
+        methods: ['POST'],
     )]
     public function __invoke(): JsonResponse
     {

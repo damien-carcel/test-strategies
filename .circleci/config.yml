@@ -81,6 +81,12 @@ jobs:
           paths:
             - ./demo/vendor
       - run:
+          name: Create the test results directory
+          command: mkdir -p demo/test_results
+      - run:
+          name: Check the code-style
+          command: task demo:tests:code-style:check -- --format=junit > demo/test_results/cs.xml
+      - run:
           name: Run the unit tests
           command: task demo:tests:unit -- --log-junit test_results/unit.xml
       - run:
