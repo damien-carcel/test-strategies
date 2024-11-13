@@ -22,7 +22,7 @@ tasks:
     aliases:
       - u
     cmds:
-      - docker compose run --rm demo composer update --prefer-dist --optimize-autoloader --no-interaction
+      - docker compose run --rm demo composer update --prefer-dist --optimize-autoloader --no-interaction {{.CLI_ARGS}}
     desc: Update project dependencies
     preconditions:
       - sh: test -d demo/vendor

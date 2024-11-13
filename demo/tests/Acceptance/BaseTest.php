@@ -10,6 +10,6 @@ final class BaseTest extends TestCase
 {
     public function testNothingReal(): void
     {
-        self::assertTrue(true);
+        self::expectNotToPerformAssertions();
     }
 }
