@@ -39,3 +39,7 @@
     - Classic unit-test with mock will be broken by this simple refacto
     - Acceptance test will not
       - Acceptance test needs in memory storage to be as fast as unit test with mock
+- Update of a user password leads to warning email
+  - We want to make the email being sent through an event subscriber reacting to the password update
+    - Here again, mocks will get in the way as we have to mock the event bus and test handler and subscriber separately
+      Acceptance test will still work without any change in such a case

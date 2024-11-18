@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\EndToEnd\User;
+namespace App\Tests\EndToEnd\User\Infrastructure\Http;
 
 use App\Tests\EndToEnd\AbstractEndToEndTestCase;
 
