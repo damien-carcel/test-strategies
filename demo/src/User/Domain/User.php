@@ -4,32 +4,31 @@ declare(strict_types=1);
 
 namespace App\User\Domain;
 
+/**
+ * @phpstan-type UserRawData array{id: string, email: string, password: string}
+ */
 final readonly class User
 {
-    public function __construct(
-        private string $id,
-        private string $name,
-        private string $email,
-        private string $password,
+    private function __construct(
+        private UserId $id,
+        private Email $email,
+        private Password $password,
     ) {}
 
-    public function getId(): string
+    public static function create(UserId $id, Email $email, Password $password): self
     {
-        return $this->id;
+        return new self($id, $email, $password);
     }
 
-    public function getName(): string
+    /**
+     * @phpstan-return UserRawData
+     */
+    public function toArray(): array
     {
-        return $this->name;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function getPassword(): string
-    {
-        return $this->password;
+        return [
+            'id' => (string) $this->id,
+            'email' => (string) $this->email,
+            'password' => (string) $this->password,
+        ];
     }
 }
