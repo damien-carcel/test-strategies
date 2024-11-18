@@ -33,7 +33,7 @@
 
 ## Example
 
-- Simple use case of updating an existing user
+- Simple use case of creating user
   - Need to retrieve the existing user through a find
   - Refactor to use a get instead
     - Classic unit-test with mock will be broken by this simple refacto

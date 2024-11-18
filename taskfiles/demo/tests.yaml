@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 tasks:
   code-style:check:
@@ -40,11 +40,26 @@ tasks:
       - docker compose run --rm demo vendor/bin/phpunit --testsuite "Acceptance Tests" --testdox {{.CLI_ARGS}}
     desc: Run acceptance tests
 
+  integration-with-in-memory-adapters:
+    aliases:
+      - i
+    cmds:
+      - docker compose run --rm --env TEST_ENV="memory" demo vendor/bin/phpunit --testsuite "Integration Tests" --group "with-in-memory-adapters" --testdox {{.CLI_ARGS}}
+    desc: Run integration tests
+
+  integration-with-production-adapters:
+    aliases:
+      - i
+    cmds:
+      - docker compose run --rm --env TEST_ENV="test" demo vendor/bin/phpunit --testsuite "Integration Tests" --group "with-production-adapters" --testdox {{.CLI_ARGS}}
+    desc: Run integration tests
+
   integration:
     aliases:
       - i
     cmds:
-      - docker compose run --rm demo vendor/bin/phpunit --testsuite "Integration Tests" --testdox {{.CLI_ARGS}}
+      - task: integration-with-in-memory-adapters
+      - task: integration-with-production-adapters
     desc: Run integration tests
 
   end-to-end:
