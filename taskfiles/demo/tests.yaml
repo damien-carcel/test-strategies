@@ -42,14 +42,14 @@ tasks:
 
   integration-with-in-memory-adapters:
     aliases:
-      - i
+      - im
     cmds:
       - docker compose run --rm --env TEST_ENV="memory" demo vendor/bin/phpunit --testsuite "Integration Tests" --group "with-in-memory-adapters" --testdox {{.CLI_ARGS}}
     desc: Run integration tests
 
   integration-with-production-adapters:
     aliases:
-      - i
+      - ip
     cmds:
       - docker compose run --rm --env TEST_ENV="test" demo vendor/bin/phpunit --testsuite "Integration Tests" --group "with-production-adapters" --testdox {{.CLI_ARGS}}
     desc: Run integration tests

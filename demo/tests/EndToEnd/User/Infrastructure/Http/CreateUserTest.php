@@ -10,6 +10,9 @@ use App\User\Domain\UserRepository;
 
 final class CreateUserTest extends AbstractEndToEndTestCase
 {
+    /**
+     * @throws \JsonException
+     */
     public function testICanCreateAUser(): void
     {
         $client = self::createClient();
@@ -20,10 +23,18 @@ final class CreateUserTest extends AbstractEndToEndTestCase
             [],
             [],
             [],
-            json_encode(['email' => 'gandalf.thegrey@theshire.com'], \JSON_THROW_ON_ERROR),
+            json_encode([
+                'email' => 'gandalf.thegrey@theshire.com',
+                'password' => 'Y0uSh4llN0tP4ss',
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $response = $client->getResponse();
-        self::assertSame(200, $response->getStatusCode());
+        self::assertSame(201, $response->getStatusCode());
+
+        /** @phpstan-var UserRepository $userRepository */
+        $userRepository = self::getContainer()->get(UserRepository::class);
+        $user = $userRepository->findByEmail(Email::create('gandalf.thegrey@theshire.com'));
+        self::assertNotNull($user);
     }
 }

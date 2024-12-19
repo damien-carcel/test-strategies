@@ -10,16 +10,41 @@
         "esbenp.prettier-vscode",
         "junstyle.php-cs-fixer",
         "ms-azuretools.vscode-docker",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-pg",
         "redhat.vscode-yaml",
         "streetsidesoftware.code-spell-checker",
         "task.vscode-task",
         "yzhang.markdown-all-in-one",
         "xdebug.php-debug",
         "xdebug.php-pack"
-      ]
+      ],
+      "settings": {
+        "[php]": {
+          "editor.defaultFormatter": "junstyle.php-cs-fixer"
+        },
+        "php-cs-fixer.config": "/app/demo/.php-cs-fixer.dist.php",
+        "php-cs-fixer.executablePath": "/app/demo/vendor/bin/php-cs-fixer",
+        "php-cs-fixer.onsave": true,
+        "php-cs-fixer.formatHtml": true,
+        "sqltools.connections": [
+          {
+            "previewLimit": 50,
+            "server": "db",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "PostgreSQL",
+            "database": "app",
+            "username": "app",
+            "password": "password"
+          }
+        ]
+      }
     }
   },
-  "dockerComposeFile": ["./compose.yaml"],
+  "dockerComposeFile": [
+    "./compose.yaml"
+  ],
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/node:1": {},
@@ -27,7 +52,9 @@
       "version": "8.3"
     }
   },
-  "forwardPorts": [8000],
+  "forwardPorts": [
+    8000
+  ],
   "initializeCommand": "./.devcontainer/setup.sh",
   "portsAttributes": {
     "8000": {
