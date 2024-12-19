@@ -18,4 +18,15 @@ abstract class AbstractEndToEndTestCase extends WebTestCase
 
         return parent::bootKernel($options);
     }
+
+    protected function setUp(): void
+    {
+        parent::setup();
+
+        $databaseConnection = self::getContainer()->get('doctrine.dbal.default_connection');
+
+        $databaseConnection->executeStatement('TRUNCATE TABLE "users"');
+
+        self::ensureKernelShutdown();
+    }
 }
