@@ -1,12 +1,12 @@
 doctrine:
     dbal:
-        url: "%env(resolve:DATABASE_URL)%"
+        url: '%env(resolve:DATABASE_URL)%'
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '16'
 
-        profiling_collect_backtrace: "%kernel.debug%"
+        profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
     # orm:
     #     auto_generate_proxy_classes: true
@@ -31,7 +31,8 @@ when@test:
     doctrine:
         dbal:
             # "TEST_TOKEN" is typically set by ParaTest
-            dbname_suffix: "_test%env(default::TEST_TOKEN)%"
+            # Deactivated in this project as we will only run tests
+            # dbname_suffix: "_test%env(default::TEST_TOKEN)%"
 
 when@prod:
     doctrine:
