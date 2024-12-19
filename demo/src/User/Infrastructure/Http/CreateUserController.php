@@ -7,6 +7,7 @@ namespace App\User\Infrastructure\Http;
 use App\User\Domain\Email;
 use App\User\Domain\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final readonly class CreateUserController
@@ -20,8 +21,9 @@ final readonly class CreateUserController
     )]
     public function __invoke(): JsonResponse
     {
-        $user = $this->userRepository->findByEmail(Email::create(''));
+        // Temporary usage to have the repository loaded in the DIC
+        $this->userRepository->findByEmail(Email::create(''));
 
-        return new JsonResponse($user, 200);
+        return new JsonResponse([], Response::HTTP_CREATED);
     }
 }
