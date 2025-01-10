@@ -26,7 +26,7 @@ abstract class AbstractEndToEndTestCase extends WebTestCase
      */
     protected function setUp(): void
     {
-        parent::setup();
+        parent::setUp();
 
         /** @var Connection $databaseConnection */
         $databaseConnection = self::getContainer()->get('doctrine.dbal.default_connection');

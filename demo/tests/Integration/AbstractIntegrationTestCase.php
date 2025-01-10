@@ -35,7 +35,8 @@ abstract class AbstractIntegrationTestCase extends KernelTestCase
      */
     protected function setUp(): void
     {
-        parent::setup();
+        parent::setUp();
+
         $testEnvironment = self::getCurrentTestEnvironment();
 
         if ('memory' === $testEnvironment) {
