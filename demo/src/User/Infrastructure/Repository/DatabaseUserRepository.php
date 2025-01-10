@@ -13,6 +13,9 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Types\Types;
 
+/**
+ * @phpstan-import-type UserRawData from User
+ */
 final readonly class DatabaseUserRepository implements UserRepository
 {
     public function __construct(private Connection $connection) {}
@@ -46,6 +49,7 @@ final readonly class DatabaseUserRepository implements UserRepository
 
         $statement->bindValue('email', (string) $email, Types::STRING);
 
+        /** @var false|UserRawData $userAsAnArray */
         $userAsAnArray = $statement->executeQuery()->fetchAssociative();
 
         if ($userAsAnArray === false) {

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration;
 
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -28,12 +30,16 @@ abstract class AbstractIntegrationTestCase extends KernelTestCase
         return parent::bootKernel($options);
     }
 
+    /**
+     * @throws Exception
+     */
     protected function setUp(): void
     {
         parent::setup();
         $testEnvironment = self::getCurrentTestEnvironment();
 
         if ('memory' === $testEnvironment) {
+            /** @var Connection $databaseConnection */
             $databaseConnection = self::getContainer()->get('doctrine.dbal.default_connection');
             $databaseConnection->executeStatement('TRUNCATE TABLE "users"');
         }
