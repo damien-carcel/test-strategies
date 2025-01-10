@@ -3,7 +3,7 @@
 # between development and production #
 ######################################
 
-FROM debian:bookworm-slim as base
+FROM debian:bookworm-slim AS base
 
 ENV DEBIAN_FRONTEND=noninteractive\
     PHP_CONF_DATE_TIMEZONE=UTC \
@@ -32,44 +32,45 @@ RUN echo 'APT::Install-Recommends "0" ; APT::Install-Suggests "0" ;' > /etc/apt/
     wget -O sury.gpg https://packages.sury.org/php/apt.gpg && apt-key add sury.gpg && rm sury.gpg && \
     apt-get update && \
     apt-get --yes install \
-        php8.3-apcu \
-        php8.3-cli \
-        php8.3-curl \
-        php8.3-dom \
-        php8.3-fpm \
-        php8.3-intl \
-        php8.3-mbstring \
-        php8.3-opcache \
-        php8.3-pdo \
-        php8.3-pgsql \
-        php8.3-zip && \
+        php8.4-apcu \
+        php8.4-cli \
+        php8.4-curl \
+        php8.4-dom \
+        php8.4-fpm \
+        php8.4-intl \
+        php8.4-mbstring \
+        php8.4-opcache \
+        php8.4-pdo \
+        php8.4-pgsql \
+        php8.4-zip && \
     apt-get clean && \
     apt-get --yes autoremove --purge && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     mkdir -p /run/php/
 
-COPY app.ini /etc/php/8.3/cli/conf.d/99-app.ini
+COPY app.ini /etc/php/8.4/cli/conf.d/99-app.ini
 
 ######################################
 # PHP CLI image used for development #
 ######################################
 
-FROM base as dev
+FROM base AS dev
 
+ENV PHP_CS_FIXER_IGNORE_ENV=1
 ENV XDEBUG_ENABLED=0
 
 # Install Git and XDEBUG
 RUN apt-get update && \
     apt-get --yes install \
         git \
-        php8.3-xdebug \
+        php8.4-xdebug \
         unzip && \
     apt-get clean && \
     apt-get --yes autoremove --purge && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Configure XDEBUG and make XDEBUG activable at container start
-COPY xdebug.ini /etc/php/8.3/cli/conf.d/99-xdebug.ini
+COPY xdebug.ini /etc/php/8.4/cli/conf.d/99-xdebug.ini
 
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
