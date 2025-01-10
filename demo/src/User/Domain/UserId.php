@@ -12,4 +12,9 @@ final class UserId extends UuidV7
     {
         return new self();
     }
+
+    public static function fromRawValue(string $uuid): self
+    {
+        return new self($uuid);
+    }
 }
