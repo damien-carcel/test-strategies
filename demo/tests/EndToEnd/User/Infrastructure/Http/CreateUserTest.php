@@ -12,24 +12,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class CreateUserTest extends AbstractEndToEndTestCase
 {
-    /**
-     * @throws \JsonException
-     */
     public function testICanCreateAUser(): void
     {
         $client = self::createClient();
 
-        $client->request(
-            'POST',
-            '/',
-            [],
-            [],
-            [],
-            json_encode([
+        $client->jsonRequest(
+            method: 'POST',
+            uri: '/users',
+            parameters: [
                 'email' => 'gandalf.thegrey@theshire.com',
                 'password' => 'Y0uSh4llN0tP4ss',
-            ], \JSON_THROW_ON_ERROR),
+            ],
         );
+
         $response = $client->getResponse();
 
         self::assertResponseStatusCodeSame(201);
