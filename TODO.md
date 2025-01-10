@@ -11,7 +11,7 @@
 ### L'état des tests chez Obat
 
 - Revenir à F.I.R.S.T. et insister qu'il y a déjà eu beaucoup de progrès entre le monolithe et les services : tests plus clairs, fixtures propres et indépendantes, pas de data conservées entre les tests
-- Mais peux mieux faire :
+- Mais peut mieux faire :
   - Trop de tests utilisant la base de donnée => relativement lents
   - Mélange au sein des "tests d'intégration" de tests métiers et de tests d'adaptateurs (au sens archi hexagonale)
   - Utilisation massive des mocks dans les tests unitaires, rendant les tests couplés à l'implémentation ⇒ fragiles et rendant la refacto pénible
@@ -24,7 +24,8 @@
   - Les tests eux-mêmes peuvent être vus comme un adaptateur des ports « contrôlant » (à gauche de l'hexagone)
 - Les tests d'intégrations viennent compléter les tests d'acceptance, en testant toutes les implémentations des adaptateurs contrôlés (par exemple repo Docrtine + son double in-memory) via le même test
   - Permet d'avoir pleine confiance dans les tests d'acceptance puisque les adaptateurs « in-memory » sont fiables
-  - Les actuels tests d'intégration testant des contrôleurs et commandes Symfony sont en fait des tests « end-to-end» et doivent être réduits au strict minimum, uniquement sur les chemins critiques
+- Les actuels tests d'intégration testant des contrôleurs et commandes Symfony sont en fait des tests « end-to-end» et doivent être réduits au strict minimum, uniquement sur les chemins critiques
+  - Comme les testst d'acceptance, ces tests ne cassent pas en cas de refacto.
 - Les tests de contrats peuvent être lancés en « in-memory ».
 
 ### Questions/Échanges
@@ -33,13 +34,13 @@
 
 ## Example
 
-- Simple use case of creating user
-  - Need to retrieve the existing user through a find
-  - Refactor to use a get instead
+- Simple use case of creating user, tested both with unit tests and acceptance tests
+  - Refactor to use a "get" instead of a "find"
     - Classic unit-test with mock will be broken by this simple refacto
     - Acceptance test will not
-      - Acceptance test needs in memory storage to be as fast as unit test with mock
-- Update of a user password leads to warning email
-  - We want to make the email being sent through an event subscriber reacting to the password update
-    - Here again, mocks will get in the way as we have to mock the event bus and test handler and subscriber separately
-      Acceptance test will still work without any change in such a case
+  - Update of a user password leads to warning email, here to tested with both unit and acceptance tests
+    - Initial implem with the email directly sent from the command handler
+    - Refactor to dispatch an "PasswordUpdated" event instead and send the email through an event subscriber
+      - Here again, mocks will get in the way as we have to mock the event bus and test handler and subscriber
+        separately.
+      - Acceptance test will still work without any change in such a case
