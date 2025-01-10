@@ -13,22 +13,13 @@ use App\User\Domain\UserRepository;
 
 final class UserRepositoryTest extends AbstractIntegrationTestCase
 {
-    private UserRepository $repository;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->repository = self::getContainer()->get(UserRepository::class);
-    }
-
     /**
      * @group with-in-memory-adapters
      * @group with-production-adapters
      */
-    public function testItFindsNothingIfThereIsNoUserStored()
+    public function testItFindsNothingIfThereIsNoUserStored(): void
     {
-        self::assertNull($this->repository->findByEmail(Email::create('gandalf.thegrey@theshire.com')));
+        self::assertNull($this->userRepository()->findByEmail(Email::create('gandalf.thegrey@theshire.com')));
     }
 
     /**
@@ -43,11 +34,19 @@ final class UserRepositoryTest extends AbstractIntegrationTestCase
             Password::create('Y0uSh4llN0tP4ss'),
         );
 
-        $this->repository->save($newUser);
+        $this->userRepository()->save($newUser);
 
         self::assertEquals(
             $newUser,
-            $this->repository->findByEmail(Email::create('gandalf.thegrey@theshire.com')),
+            $this->userRepository()->findByEmail(Email::create('gandalf.thegrey@theshire.com')),
         );
+    }
+
+    private function userRepository(): UserRepository
+    {
+        /** @phpstan-var UserRepository $repository */
+        $repository = self::getContainer()->get(UserRepository::class);
+
+        return $repository;
     }
 }

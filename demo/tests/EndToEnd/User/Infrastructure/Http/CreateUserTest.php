@@ -6,7 +6,9 @@ namespace App\Tests\EndToEnd\User\Infrastructure\Http;
 
 use App\Tests\EndToEnd\AbstractEndToEndTestCase;
 use App\User\Domain\Email;
+use App\User\Domain\User;
 use App\User\Domain\UserRepository;
+use Symfony\Component\HttpFoundation\Response;
 
 final class CreateUserTest extends AbstractEndToEndTestCase
 {
@@ -28,13 +30,34 @@ final class CreateUserTest extends AbstractEndToEndTestCase
                 'password' => 'Y0uSh4llN0tP4ss',
             ], \JSON_THROW_ON_ERROR),
         );
-
         $response = $client->getResponse();
-        self::assertSame(201, $response->getStatusCode());
 
+        self::assertResponseStatusCodeSame(201);
+        $user = self::assertUserIsCreated();
+        self::assertResponseContent($response, $user);
+    }
+
+    private static function assertUserIsCreated(): User
+    {
         /** @phpstan-var UserRepository $userRepository */
         $userRepository = self::getContainer()->get(UserRepository::class);
         $user = $userRepository->findByEmail(Email::create('gandalf.thegrey@theshire.com'));
         self::assertNotNull($user);
+
+        return $user;
+    }
+
+    /**
+     * @throws \JsonException
+     */
+    private static function assertResponseContent(Response $response, User $user): void
+    {
+        $responseContent = $response->getContent();
+        self::assertNotFalse($responseContent);
+
+        self::assertEqualsCanonicalizing(
+            ['user_id' => $user->toArray()['id']],
+            json_decode(json: $responseContent, associative: true, flags: JSON_THROW_ON_ERROR),
+        );
     }
 }
