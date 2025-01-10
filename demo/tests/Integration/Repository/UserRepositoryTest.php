@@ -10,22 +10,19 @@ use App\User\Domain\Password;
 use App\User\Domain\User;
 use App\User\Domain\UserId;
 use App\User\Domain\UserRepository;
+use PHPUnit\Framework\Attributes\Group;
 
 final class UserRepositoryTest extends AbstractIntegrationTestCase
 {
-    /**
-     * @group with-in-memory-adapters
-     * @group with-production-adapters
-     */
+    #[Group('with-in-memory-adapters')]
+    #[Group('with-production-adapters')]
     public function testItFindsNothingIfThereIsNoUserStored(): void
     {
         self::assertNull($this->userRepository()->findByEmail(Email::create('gandalf.thegrey@theshire.com')));
     }
 
-    /**
-     * @group with-in-memory-adapters
-     * @group with-production-adapters
-     */
+    #[Group('with-in-memory-adapters')]
+    #[Group('with-production-adapters')]
     public function testICanSaveAUser(): void
     {
         $newUser = User::create(
