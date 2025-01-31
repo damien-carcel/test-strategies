@@ -10,7 +10,7 @@ use App\User\Domain\User;
 use App\User\Domain\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 
-final class CreateUserTest extends AbstractEndToEndTestCase
+final class CreateUserControllerTest extends AbstractEndToEndTestCase
 {
     public function testICanCreateAUser(): void
     {

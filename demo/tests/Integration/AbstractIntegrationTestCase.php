@@ -21,7 +21,7 @@ abstract class AbstractIntegrationTestCase extends KernelTestCase
 
         if (!\in_array($testEnvironment, ['memory', 'test'], true)) {
             throw new \RuntimeException(
-                "Invalid TEST_ENV environment variable value \"$testEnvironment\". Valid values are \"in-memory\" and \"test\".",
+                "Invalid TEST_ENV environment variable value \"$testEnvironment\". Valid values are \"memory\" and \"test\".",
             );
         }
 
