@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\Repository;
+namespace App\User\Infrastructure\Storage\Database;
 
-use App\User\Domain\Email;
-use App\User\Domain\Password;
-use App\User\Domain\User;
-use App\User\Domain\UserId;
-use App\User\Domain\UserRepository;
+use App\User\Domain\ValueObject\Email;
+use App\User\Domain\ValueObject\Password;
+use App\User\Domain\Entity\User;
+use App\User\Domain\ValueObject\UserId;
+use App\User\Domain\Port\UserRepositoryInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Types\Types;
@@ -16,7 +16,7 @@ use Doctrine\DBAL\Types\Types;
 /**
  * @phpstan-import-type UserRawData from User
  */
-final readonly class DatabaseUserRepository implements UserRepository
+final readonly class UserRepository implements UserRepositoryInterface
 {
     public function __construct(private Connection $connection) {}
 

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\EndToEnd\User\Infrastructure\Http;
+namespace App\Tests\EndToEnd\User\Infrastructure\UI\Http;
 
 use App\Tests\EndToEnd\AbstractEndToEndTestCase;
-use App\User\Domain\Email;
-use App\User\Domain\Password;
-use App\User\Domain\User;
-use App\User\Domain\UserId;
-use App\User\Domain\UserRepository;
+use App\User\Domain\ValueObject\Email;
+use App\User\Domain\ValueObject\Password;
+use App\User\Domain\Entity\User;
+use App\User\Domain\ValueObject\UserId;
+use App\User\Domain\Port\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 final class CreateUserControllerTest extends AbstractEndToEndTestCase
@@ -58,8 +58,8 @@ final class CreateUserControllerTest extends AbstractEndToEndTestCase
 
     private static function assertUserIsCreated(): User
     {
-        /** @phpstan-var UserRepository $userRepository */
-        $userRepository = self::getContainer()->get(UserRepository::class);
+        /** @phpstan-var UserRepositoryInterface $userRepository */
+        $userRepository = self::getContainer()->get(UserRepositoryInterface::class);
         $user = $userRepository->findByEmail(Email::create('gandalf.thegrey@theshire.com'));
         self::assertNotNull($user);
 
@@ -82,8 +82,8 @@ final class CreateUserControllerTest extends AbstractEndToEndTestCase
 
     private function loadUserWithEmail(string $email): void
     {
-        /** @phpstan-var UserRepository $userRepository */
-        $userRepository = self::getContainer()->get(UserRepository::class);
+        /** @phpstan-var UserRepositoryInterface $userRepository */
+        $userRepository = self::getContainer()->get(UserRepositoryInterface::class);
         $userRepository->save(User::create(
             id: new UserId(),
             email: Email::create($email),

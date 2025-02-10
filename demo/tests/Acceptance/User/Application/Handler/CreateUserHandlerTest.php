@@ -7,17 +7,17 @@ namespace App\Tests\Acceptance\User\Application\Handler;
 use App\Tests\Acceptance\AbstractAcceptanceTestCase;
 use App\User\Application\Command\CreateUser;
 use App\User\Application\Handler\CreateUserHandler;
-use App\User\Domain\Email;
+use App\User\Domain\ValueObject\Email;
 use App\User\Domain\Exception\UserAlreadyExists;
-use App\User\Domain\Password;
-use App\User\Domain\User;
-use App\User\Domain\UserId;
-use App\User\Domain\UserRepository;
+use App\User\Domain\ValueObject\Password;
+use App\User\Domain\Entity\User;
+use App\User\Domain\ValueObject\UserId;
+use App\User\Domain\Port\UserRepositoryInterface;
 
 final class CreateUserHandlerTest extends AbstractAcceptanceTestCase
 {
     private CreateUserHandler $createUserHandler;
-    private UserRepository $userRepository;
+    private UserRepositoryInterface $userRepository;
 
     protected function setUp(): void
     {
@@ -25,8 +25,8 @@ final class CreateUserHandlerTest extends AbstractAcceptanceTestCase
 
         /** @phpstan-var CreateUserHandler $createUserHandler */
         $createUserHandler = self::getContainer()->get(CreateUserHandler::class);
-        /** @phpstan-var UserRepository $userRepository */
-        $userRepository = self::getContainer()->get(UserRepository::class);
+        /** @phpstan-var UserRepositoryInterface $userRepository */
+        $userRepository = self::getContainer()->get(UserRepositoryInterface::class);
 
         $this->createUserHandler = $createUserHandler;
         $this->userRepository = $userRepository;

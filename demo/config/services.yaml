@@ -26,17 +26,17 @@ services:
     #------------
     # Controllers
 
-    App\User\Infrastructure\Http\:
-        resource: '../src/User/Infrastructure/Http/'
+    App\User\Infrastructure\UI\Http\:
+        resource: '../src/User/Infrastructure/UI/Http/'
         tags: ['controller.service_arguments']
 
     #-------------
     # Repositories
 
-    App\User\Domain\UserRepository:
-        class: App\User\Infrastructure\Repository\DatabaseUserRepository
+    App\User\Domain\Port\UserRepositoryInterface:
+        class: App\User\Infrastructure\Storage\Database\UserRepository
 
 when@memory:
     services:
-        App\User\Domain\UserRepository:
-            class: App\User\Infrastructure\Repository\InMemoryUserRepository
+        App\User\Domain\Port\UserRepositoryInterface:
+            class: App\User\Infrastructure\Storage\InMemory\UserRepository

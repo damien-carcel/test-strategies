@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\User\Domain\Exception;
 
-use App\User\Domain\Email;
+use App\User\Domain\ValueObject\Email;
 
 final class UserAlreadyExists extends \RuntimeException
 {

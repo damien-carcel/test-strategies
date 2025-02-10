@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\User\Domain;
+namespace App\User\Domain\Entity;
+
+use App\User\Domain\ValueObject\Email;
+use App\User\Domain\ValueObject\Password;
+use App\User\Domain\ValueObject\UserId;
 
 /**
  * @phpstan-type UserRawData array{id: string, email: string, password: string}

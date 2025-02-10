@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\Http\Request;
+namespace App\User\Infrastructure\UI\Http\Request;
 
 use App\User\Application\Command\CreateUser;
-use App\User\Domain\Email;
-use App\User\Domain\Password;
+use App\User\Domain\ValueObject\Email;
+use App\User\Domain\ValueObject\Password;
 
 final readonly class CreateUserRequest
 {

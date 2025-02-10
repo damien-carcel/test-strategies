@@ -1,5 +1,5 @@
 user_controllers:
     resource:
-        path: ../src/User/Infrastructure/Http
-        namespace: App\User\Infrastructure\Http
+        path: ../src/User/Infrastructure/UI/Http
+        namespace: App\User\Infrastructure\UI\Http
     type: attribute

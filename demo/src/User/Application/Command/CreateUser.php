@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\User\Application\Command;
 
-use App\User\Domain\Email;
-use App\User\Domain\Password;
+use App\User\Domain\ValueObject\Email;
+use App\User\Domain\ValueObject\Password;
 
 final readonly class CreateUser
 {

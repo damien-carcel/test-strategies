@@ -6,15 +6,15 @@ namespace App\User\Application\Handler;
 
 use App\User\Application\Command\CreateUser;
 use App\User\Domain\Exception\UserAlreadyExists;
-use App\User\Domain\User;
-use App\User\Domain\UserId;
-use App\User\Domain\UserRepository;
+use App\User\Domain\Entity\User;
+use App\User\Domain\ValueObject\UserId;
+use App\User\Domain\Port\UserRepositoryInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
 #[Autoconfigure(public: true)]
 final readonly class CreateUserHandler
 {
-    public function __construct(private UserRepository $userRepository) {}
+    public function __construct(private UserRepositoryInterface $userRepository) {}
 
     public function __invoke(CreateUser $command): UserId
     {

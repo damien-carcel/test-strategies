@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\Http;
+namespace App\User\Infrastructure\UI\Http;
 
 use App\User\Application\Handler\CreateUserHandler;
 use App\User\Domain\Exception\UserAlreadyExists;
-use App\User\Infrastructure\Http\Request\CreateUserRequest;
+use App\User\Infrastructure\UI\Http\Request\CreateUserRequest;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
