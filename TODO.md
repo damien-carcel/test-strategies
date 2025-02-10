@@ -12,7 +12,7 @@
 
 - Revenir à F.I.R.S.T. et insister qu'il y a déjà eu beaucoup de progrès entre le monolithe et les services : tests plus clairs, fixtures propres et indépendantes, pas de data conservées entre les tests
 - Mais peut mieux faire :
-  - Trop de tests utilisant la base de donnée => relativement lents
+  - Trop de tests utilisant la base de donnée ⇒ relativement lents
   - Mélange au sein des "tests d'intégration" de tests métiers et de tests d'adaptateurs (au sens archi hexagonale)
   - Utilisation massive des mocks dans les tests unitaires, rendant les tests couplés à l'implémentation ⇒ fragiles et rendant la refacto pénible
     - On peut rappeler au passage les différents « doubles » existant (in memory, stub, mock)
@@ -34,13 +34,12 @@
 
 ## Example
 
-- Simple use case of creating user, tested both with unit tests and acceptance tests
-  - Refactor to use a "get" instead of a "find"
-    - Classic unit-test with mock will be broken by this simple refacto
-    - Acceptance test will not
-  - Update of a user password leads to warning email, here to tested with both unit and acceptance tests
-    - Initial implem with the email directly sent from the command handler
-    - Refactor to dispatch an "PasswordUpdated" event instead and send the email through an event subscriber
-      - Here again, mocks will get in the way as we have to mock the event bus and test handler and subscriber
-        separately.
-      - Acceptance test will still work without any change in such a case
+- Simple use case of creating user account:
+  - Try to find a user with the same email ⇒ Will throw an exception if the user already exists.
+    - Just adding this feature breaks the unit test, as this repo call was not mocked previously, only the save was.
+  - Send an e-mail to the user to notify them their account was created.
+  - Tested both with unit tests and acceptance tests
+- Two refactorizations:
+  - Use a "get" instead of a "find" in the repository
+  - Send the e-mail in a separate service following the dispatch of an event.
+  - Classic unit-test with mock will be broken by this simple refacto, acceptance test will not be.
