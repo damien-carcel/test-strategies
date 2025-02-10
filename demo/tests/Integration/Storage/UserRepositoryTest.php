@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Integration\Repository;
+namespace App\Tests\Integration\Storage;
 
 use App\Tests\Integration\AbstractIntegrationTestCase;
-use App\User\Domain\Email;
-use App\User\Domain\Password;
-use App\User\Domain\User;
-use App\User\Domain\UserId;
-use App\User\Domain\UserRepository;
+use App\User\Domain\ValueObject\Email;
+use App\User\Domain\ValueObject\Password;
+use App\User\Domain\Entity\User;
+use App\User\Domain\ValueObject\UserId;
+use App\User\Domain\Port\UserRepositoryInterface;
 use PHPUnit\Framework\Attributes\Group;
 
 final class UserRepositoryTest extends AbstractIntegrationTestCase
@@ -39,10 +39,10 @@ final class UserRepositoryTest extends AbstractIntegrationTestCase
         );
     }
 
-    private function userRepository(): UserRepository
+    private function userRepository(): UserRepositoryInterface
     {
-        /** @phpstan-var UserRepository $repository */
-        $repository = self::getContainer()->get(UserRepository::class);
+        /** @phpstan-var UserRepositoryInterface $repository */
+        $repository = self::getContainer()->get(UserRepositoryInterface::class);
 
         return $repository;
     }

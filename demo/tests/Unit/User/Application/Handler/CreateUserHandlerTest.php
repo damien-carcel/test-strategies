@@ -6,26 +6,26 @@ namespace App\Tests\Unit\User\Application\Handler;
 
 use App\User\Application\Command\CreateUser;
 use App\User\Application\Handler\CreateUserHandler;
-use App\User\Domain\Email;
+use App\User\Domain\ValueObject\Email;
 use App\User\Domain\Exception\UserAlreadyExists;
-use App\User\Domain\Password;
-use App\User\Domain\User;
-use App\User\Domain\UserId;
-use App\User\Domain\UserRepository;
+use App\User\Domain\ValueObject\Password;
+use App\User\Domain\Entity\User;
+use App\User\Domain\ValueObject\UserId;
+use App\User\Domain\Port\UserRepositoryInterface;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 final class CreateUserHandlerTest extends TestCase
 {
-    private readonly MockObject&UserRepository $userRepositoryMock;
+    private readonly MockObject&UserRepositoryInterface $userRepositoryMock;
 
     /**
      * @throws Exception
      */
     protected function setUp(): void
     {
-        $this->userRepositoryMock = $this->createMock(UserRepository::class);
+        $this->userRepositoryMock = $this->createMock(UserRepositoryInterface::class);
     }
 
     public function testItCreatesAUser(): void
