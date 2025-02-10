@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\Repository;
+namespace App\User\Infrastructure\Storage\InMemory;
 
-use App\User\Domain\Email;
-use App\User\Domain\Password;
-use App\User\Domain\User;
-use App\User\Domain\UserId;
-use App\User\Domain\UserRepository;
+use App\User\Domain\ValueObject\Email;
+use App\User\Domain\ValueObject\Password;
+use App\User\Domain\Entity\User;
+use App\User\Domain\ValueObject\UserId;
+use App\User\Domain\Port\UserRepositoryInterface;
 
 /**
  * @phpstan-import-type UserRawData from User
  */
-final class InMemoryUserRepository implements UserRepository
+final class UserRepository implements UserRepositoryInterface
 {
     /** @var UserRawData[] */
     private array $users = [];
