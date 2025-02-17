@@ -14,11 +14,19 @@ use PHPUnit\Framework\Attributes\Group;
 
 final class UserRepositoryTest extends AbstractIntegrationTestCase
 {
+    private readonly UserRepositoryInterface $userRepository;
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->userRepository = self::getContainer()->get(UserRepositoryInterface::class);
+    }
+
     #[Group('with-in-memory-adapters')]
     #[Group('with-production-adapters')]
     public function testItFindsNothingIfThereIsNoUserStored(): void
     {
-        self::assertNull($this->userRepository()->findByEmail(Email::create('gandalf.thegrey@theshire.com')));
+        self::assertNull($this->userRepository->findByEmail(Email::create('gandalf.thegrey@theshire.com')));
     }
 
     #[Group('with-in-memory-adapters')]
@@ -31,19 +39,11 @@ final class UserRepositoryTest extends AbstractIntegrationTestCase
             Password::create('Y0uSh4llN0tP4ss'),
         );
 
-        $this->userRepository()->save($newUser);
+        $this->userRepository->save($newUser);
 
         self::assertEquals(
             $newUser,
-            $this->userRepository()->findByEmail(Email::create('gandalf.thegrey@theshire.com')),
+            $this->userRepository->findByEmail(Email::create('gandalf.thegrey@theshire.com')),
         );
-    }
-
-    private function userRepository(): UserRepositoryInterface
-    {
-        /** @phpstan-var UserRepositoryInterface $repository */
-        $repository = self::getContainer()->get(UserRepositoryInterface::class);
-
-        return $repository;
     }
 }

@@ -43,3 +43,7 @@
   - Use a "get" instead of a "find" in the repository.
   - Send the e-mail in a separate service following the dispatch of an event.
   - Classic unit-test with mock will be broken by this simple refacto, acceptance test will not be.
+
+## Tasks
+
+- Update to PHPUnit 12.

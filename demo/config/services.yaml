@@ -31,12 +31,18 @@ services:
         tags: ['controller.service_arguments']
 
     #-------------
-    # Repositories
+    # Services
 
     App\User\Domain\Port\UserRepositoryInterface:
         class: App\User\Infrastructure\Storage\Database\UserRepository
+
+    App\User\Domain\Port\MailerInterface:
+        class: App\User\Infrastructure\Mailer\Symfony\Mailer
 
 when@memory:
     services:
         App\User\Domain\Port\UserRepositoryInterface:
             class: App\User\Infrastructure\Storage\InMemory\UserRepository
+
+        App\User\Domain\Port\MailerInterface:
+            class: App\User\Infrastructure\Mailer\InMemory\Mailer
