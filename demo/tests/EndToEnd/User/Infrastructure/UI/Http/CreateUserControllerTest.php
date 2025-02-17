@@ -35,6 +35,12 @@ final class CreateUserControllerTest extends AbstractEndToEndTestCase
         self::assertResponseStatusCodeSame(201);
         $user = self::assertUserIsCreated();
         self::assertResponseContent($response, $user);
+
+        $this->assertEmailCount(1);
+
+        $email = $this->getMailerMessage();
+        $this->assertEmailSubjectContains($email, 'Welcome to Mordor');
+        $this->assertEmailHtmlBodyContains($email, 'Fly, you fools!');
     }
 
     public function testICannotCreateAUserIfAnotherOneAlreadyExistsForTheSameEmail(): void
