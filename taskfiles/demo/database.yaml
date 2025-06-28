@@ -4,8 +4,7 @@ tasks:
   up:
     desc: Start the database
     cmds:
-      - docker compose up -d database
-      - ./docker/database/wait_for_it.sh
+      - docker compose up -d --wait database
     aliases:
       - u
 
@@ -15,3 +14,10 @@ tasks:
     cmds:
       - docker compose stop database
     desc: Stop the database
+
+  migrate:
+    desc: Run database migrations
+    cmds:
+      - docker compose run --rm demo bin/console doctrine:migrations:migrate --no-interaction
+    aliases:
+      - m
