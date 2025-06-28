@@ -4,8 +4,7 @@ tasks:
   up:
     desc: Start the database
     cmds:
-      - docker compose up -d database
-      - ./docker/database/wait_for_it.sh
+      - docker compose up -d --wait database
     aliases:
       - u
 

@@ -39,7 +39,14 @@
     - Just adding this feature breaks the unit test, as this repo call was not mocked previously, only the save was.
   - Send an e-mail to the user to notify them their account was created.
   - Tested both with unit tests and acceptance tests
-- Two refactorizations:
+- Two refactorizations to be done each in a dedicated commit (will allow to link them in the presentation):
   - Use a "get" instead of a "find" in the repository.
   - Send the e-mail in a separate service following the dispatch of an event.
   - Classic unit-test with mock will be broken by this simple refacto, acceptance test will not be.
+
+## Tasks
+
+- Move the presentation in a dedicated "presentation" sub-folder.
+- Update to Symfony 7.3
+- Update to PHPUnit 12.
+- Move VS Code project settings to editorconfig.

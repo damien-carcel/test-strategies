@@ -93,13 +93,16 @@ jobs:
           name: Run the unit tests
           command: task demo:tests:unit -- --log-junit test_results/unit.xml
       - run:
-          name: Run the unit tests
+          name: Run the acceptance tests
           command: task demo:tests:acceptance -- --log-junit test_results/acceptance.xml
       - run:
-          name: Run the unit tests
+          name: Start the database
+          command: task demo:database:up demo:database:migrate
+      - run:
+          name: Run the integration tests
           command: task demo:tests:integration -- --log-junit test_results/integration.xml
       - run:
-          name: Run the unit tests
+          name: Run the end-to-end tests
           command: task demo:tests:end-to-end -- --log-junit test_results/e2e.xml
       - store_artifacts:
           path: demo/test_results
