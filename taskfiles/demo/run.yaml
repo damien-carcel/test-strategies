@@ -1,9 +1,0 @@
-version: 3
-
-tasks:
-  bash:
-    aliases:
-      - b
-    cmds:
-      - docker compose run --rm --build --remove-orphans demo bash
-    desc: Launch a shell in the demo container

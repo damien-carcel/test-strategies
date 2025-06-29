@@ -1,5 +1,10 @@
 version: '3'
 
+includes:
+  database:
+    taskfile: ./database.yaml
+    internal: true
+
 tasks:
   code-style:check:
     aliases:
@@ -95,6 +100,13 @@ tasks:
       - echo "|-----------------------|"
       - echo ""
       - task: acceptance
+      - echo ""
+      - echo "|-----------------------|"
+      - echo "| Setup the database    |"
+      - echo "|-----------------------|"
+      - echo ""
+      - task: database:up
+      - task: database:migrate
       - echo ""
       - echo "|-----------------------|"
       - echo "| Run integration tests |"

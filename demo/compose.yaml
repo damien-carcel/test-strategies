@@ -1,27 +1,4 @@
 services:
-  presentation:
-    command:
-      - npm
-      - run
-      - dev
-    environment:
-      NPM_CONFIG_CACHE: ${NPM_CONFIG_CACHE:-/home/node/.npm}
-    expose:
-      - 8000
-    image: node:lts-slim
-    ports:
-      - "8000:8000"
-    tty: true
-    user: ${HOST_USER_IDS:-1000:1000}
-    volumes:
-      - type: bind
-        source: .
-        target: /app
-      - type: bind
-        source: ~/.npm
-        target: /home/node/.npm
-    working_dir: /app
-
   demo:
     build:
       context: docker/php
@@ -48,7 +25,7 @@ services:
       - type: bind
         source: ${HOST_COMPOSER_HOME:-~/.config/composer}
         target: /home/composer/.cache/composer
-    working_dir: /app/demo
+    working_dir: /app
 
   database:
     environment:
