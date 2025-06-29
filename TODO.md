@@ -4,33 +4,33 @@
 
 ### Introduction
 
-- Rappels sur ce qu'est un « bon » test ⇒ F.I.R.S.T. (article medium qui synthétise bien le sujet).
-- Les différents types de tests : unitaires, intégration, end-to-end, applicatif/fonctionnel.
-  - On reste très simple sur cette partie : les définitions de ces termes varient beaucoup selon les sources, ce qui compte, c'est ce qu'ils signifient pour nous, qu'on soit tous d'accord sur le sens du terme quand on l'emploie.
+- Reminder of what makes a "good" test ⇒ F.I.R.S.T. (Medium article that summarizes the topic well).
+- The different types of tests: unit, integration, end-to-end, application/functional.
+  - Keep it very simple for this part: the definitions of these terms vary greatly depending on the sources. What matters is what they mean to us, ensuring we all agree on the meaning of the term when we use it.
 
-### L'état des tests chez Obat
+### The state of tests at Obat
 
-- Revenir à F.I.R.S.T. et insister qu'il y a déjà eu beaucoup de progrès entre le monolithe et les services : tests plus clairs, fixtures propres et indépendantes, pas de data conservées entre les tests.
-- Mais peut mieux faire :
-  - Trop de tests utilisant la base de donnée ⇒ relativement lents.
-  - Mélange au sein des "tests d'intégration" de tests métiers et de tests d'adaptateurs (au sens archi hexagonale).
-  - Utilisation massive des mocks dans les tests unitaires, rendant les tests couplés à l'implémentation ⇒ fragiles et rendant la refacto pénible.
-    - On peut rappeler au passage les différents « doubles » existant (in memory, stub, mock).
+- Return to F.I.R.S.T. and emphasize that there has already been significant progress between the monolith and the services: clearer tests, clean and independent fixtures, no data retained between tests.
+- But there is room for improvement:
+  - Too many tests using the database ⇒ relatively slow.
+  - Mixing within "integration tests" of business tests and adapter tests (in the sense of hexagonal architecture).
+  - Massive use of mocks in unit tests, making tests coupled to the implementation ⇒ fragile and making refactoring painful.
+    - We can recall the different "doubles" that exist (in-memory, stub, mock).
 
-### Comment mieux faire
+### How to improve
 
-- Rappel de l'archi hexagonale via un schéma pour introduire la notion de "test boundaries"
-- Présentation du concept de « tests d'acceptance » : des tests métier, appelant le command et query (use cases) et utilisant un adaptateur « in memory » pour les ports « contrôlés » (à droite de l'hexagone) : DB, système de fichier, temps, etc.
-  - Les tests eux-mêmes peuvent être vus comme un adaptateur des ports « contrôlant » (à gauche de l'hexagone)
-- Les tests d'intégrations viennent compléter les tests d'acceptance, en testant toutes les implémentations des adaptateurs contrôlés (par exemple repo Docrtine + son double in-memory) via le même test.
-  - Permet d'avoir pleine confiance dans les tests d'acceptance puisque les adaptateurs « in-memory » sont fiables
-- Les actuels tests d'intégration testant des contrôleurs et commandes Symfony sont en fait des tests « end-to-end» et doivent être réduits au strict minimum, uniquement sur les chemins critiques.
-  - Comme les testst d'acceptance, ces tests ne cassent pas en cas de refacto.
-- Les tests de contrats peuvent être lancés en « in-memory ».
+- Reminder of hexagonal architecture via a diagram to introduce the notion of "test boundaries."
+- Presentation of the concept of "acceptance tests": business tests, calling the command and query (use cases) and using an "in-memory" adapter for the "controlled" ports (on the right side of the hexagon): DB, file system, time, etc.
+  - The tests themselves can be seen as an adapter for the "controlling" ports (on the left side of the hexagon).
+- Integration tests complement acceptance tests by testing all implementations of controlled adapters (e.g., Doctrine repo + its in-memory double) via the same test.
+  - Allows full confidence in acceptance tests since the "in-memory" adapters are reliable.
+- Current integration tests that test Symfony controllers and commands are actually "end-to-end" tests and should be reduced to the bare minimum, only on critical paths.
+  - Like acceptance tests, these tests do not break during refactoring.
+- Contract tests can be run "in-memory."
 
-### Questions/Échanges
+### Questions/Discussion
 
-- Prévoir du temps à la fin de la présentation.
+- Allocate time at the end of the presentation.
 
 ## Example
 
@@ -46,7 +46,9 @@
 
 ## Tasks
 
-- Move the presentation in a dedicated "presentation" sub-folder.
+- Move the presentation in a dedicated "presentation" sub-folder. Success if:
+  - Both presentation and demo can be started in devcontainer.
+  - Both presentation and demo tasks are runnable from devcontainer.
 - Update to Symfony 7.3
 - Update to PHPUnit 12.
-- Move VS Code project settings to editorconfig.
+- Serve the API with Franklin PHP.

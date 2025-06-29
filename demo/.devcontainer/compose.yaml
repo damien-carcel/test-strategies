@@ -1,7 +1,7 @@
 services:
   devcontainer:
     build:
-      context: ../docker/devcontainer
+      context: ../../docker/devcontainer
     command:
       - sleep
       - infinity
@@ -15,7 +15,4 @@ services:
       - type: bind
         source: ~/.config/composer
         target: /home/vscode/.config/composer
-      - type: bind
-        source: ~/.npm
-        target: /home/vscode/.npm
     working_dir: /app

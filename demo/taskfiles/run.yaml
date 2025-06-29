@@ -1,0 +1,16 @@
+version: 3
+
+tasks:
+  bash:
+    aliases:
+      - b
+    cmds:
+      - docker compose run --rm --remove-orphans demo bash
+    desc: Launch a shell in the demo container
+
+  down:
+    aliases:
+      - d
+    cmds:
+      - docker compose down -v --remove-orphans
+    desc: Stop and remove the demo containers

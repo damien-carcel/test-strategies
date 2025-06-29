@@ -4,10 +4,8 @@
       "extensions": [
         "bmewburn.vscode-intelephense-client",
         "CircleCI.circleci",
-        "dbaeumer.vscode-eslint",
         "devsense.phptools-vscode",
         "eamodio.gitlens",
-        "esbenp.prettier-vscode",
         "junstyle.php-cs-fixer",
         "ms-azuretools.vscode-docker",
         "mtxr.sqltools",
@@ -47,22 +45,13 @@
   ],
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/node:1": {},
     "ghcr.io/devcontainers/features/php:1": {
-      "version": "8.3"
+      "version": "8.4"
     }
   },
-  "forwardPorts": [
-    8000
-  ],
   "initializeCommand": "./.devcontainer/setup.sh",
-  "portsAttributes": {
-    "8000": {
-      "label": "Vite Dev server"
-    }
-  },
-  "postCreateCommand": "task presentation:dependencies:install presentation:run:dev",
-  "name": "my-app",
+  "postCreateCommand": "task dependencies:install database:up database:migrate",
+  "name": "demo",
   "service": "devcontainer",
   "workspaceFolder": "/app"
 }

@@ -9,8 +9,13 @@ tasks:
     desc: Launch a shell in the development container
 
   dev:
-    aliases:
-      - d
     cmds:
       - docker compose up --detach --remove-orphans presentation
     desc: Run the presentation development server
+
+  down:
+    aliases:
+      - d
+    cmds:
+      - docker compose down -v --remove-orphans
+    desc: Stop and remove the presentation containers
