@@ -46,9 +46,6 @@
 
 ## Tasks
 
-- Move the presentation in a dedicated "presentation" sub-folder. Success if:
-  - Both presentation and demo can be started in devcontainer.
-  - Both presentation and demo tasks are runnable from devcontainer.
 - Update to Symfony 7.3
 - Update to PHPUnit 12.
 - Serve the API with Franklin PHP.
