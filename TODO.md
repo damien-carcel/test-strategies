@@ -46,6 +46,4 @@
 
 ## Tasks
 
-- Update to Symfony 7.3
-- Update to PHPUnit 12.
 - Serve the API with Franklin PHP.

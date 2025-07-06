@@ -24,27 +24,27 @@ doctrine:
     #             dir: '%kernel.project_dir%/src/Entity'
     #             prefix: 'App\Entity'
     #             alias: App
-    #    controller_resolver:
-    #        auto_mapping: false
+    #     controller_resolver:
+    #         auto_mapping: false
 
 when@test:
     doctrine:
         dbal:
-            # "TEST_TOKEN" is typically set by ParaTest
             # Deactivated in this project as we will only run tests
-            # dbname_suffix: "_test%env(default::TEST_TOKEN)%"
+            # "TEST_TOKEN" is typically set by ParaTest
+            # dbname_suffix: '_test%env(default::TEST_TOKEN)%'
 
 when@prod:
-    doctrine:
-        # orm:
-        #     auto_generate_proxy_classes: false
-        #     proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
-        #     query_cache_driver:
-        #         type: pool
-        #         pool: doctrine.system_cache_pool
-        #     result_cache_driver:
-        #         type: pool
-        #         pool: doctrine.result_cache_pool
+    # doctrine:
+    #     orm:
+    #         auto_generate_proxy_classes: false
+    #         proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
+    #         query_cache_driver:
+    #             type: pool
+    #             pool: doctrine.system_cache_pool
+    #         result_cache_driver:
+    #             type: pool
+    #             pool: doctrine.result_cache_pool
 
     framework:
         cache:
